@@ -2,12 +2,12 @@ name: Deploy to Azure App Service
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
-  AZURE_WEBAPP_NAME: 'monday-magic-tracker'    # Set this to your app's name
+  AZURE_WEBAPP_NAME: 'monday-magic-tracker-app'    # Set this to your app's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'               # Set this to the path to your web app project
   DOTNET_VERSION: '8.0.x'                      # Set this to the .NET version to use
   NODE_VERSION: '18.x'                         # Set this to the Node.js version to use
@@ -43,9 +43,10 @@ jobs:
         cd ClientApp
         npm ci
 
-    - name: Build frontend
+    - name: Build frontend with legacy OpenSSL
       run: |
         cd ClientApp
+        export NODE_OPTIONS="--openssl-legacy-provider"
         npm run build
 
     - name: Publish
@@ -60,7 +61,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
