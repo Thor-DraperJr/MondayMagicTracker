@@ -151,6 +151,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Add a health check endpoint
+app.MapGet("/health", () => new { status = "healthy", timestamp = DateTime.UtcNow });
+
 // Configure SPA
 app.UseSpa(spa =>
 {
@@ -170,10 +173,27 @@ using (var scope = app.Services.CreateScope())
     {
         context.Database.EnsureCreated();
         Console.WriteLine("Database initialized successfully.");
+        
+        // Seed commanders if empty
+        if (!context.Commanders.Any())
+        {
+            var commanders = new[]
+            {
+                new Commander { Name = "Atraxa, Praetors' Voice", Colors = "WUBG" },
+                new Commander { Name = "Edgar Markov", Colors = "WBR" },
+                new Commander { Name = "The Ur-Dragon", Colors = "WUBRG" },
+                new Commander { Name = "Prossh, Skyraider of Kher", Colors = "BRG" },
+                new Commander { Name = "Breya, Etherium Shaper", Colors = "WUBR" }
+            };
+            context.Commanders.AddRange(commanders);
+            context.SaveChanges();
+            Console.WriteLine("Sample commanders seeded successfully.");
+        }
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Error initializing database: {ex.Message}");
+        Console.WriteLine($"Warning: Database initialization failed: {ex.Message}");
+        Console.WriteLine("Application will continue without database connection.");
     }
 }
 
