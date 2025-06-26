@@ -1,0 +1,7 @@
+{
+  "name": "monday-magic-tracker",
+  "location": "East US",
+  "sqlServerAdminLogin": "mtgadmin",
+  "sqlServerAdminPassword": "ChangeThisPassword123!",
+  "jwtKey": "your-super-secret-jwt-key-with-at-least-32-characters-for-production"
+}
