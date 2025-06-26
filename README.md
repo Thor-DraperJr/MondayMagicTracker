@@ -2,6 +2,57 @@
 
 A comprehensive web application for tracking Magic: The Gathering games played with your playgroup every Monday (or any day)!
 
+## 🚀 Current Deployment Status (June 26, 2025)
+
+### ✅ **COMPLETED - Azure Infrastructure:**
+- **Resource Group:** `MondayMagicTracker-rg` (East US)
+- **Azure SQL Server:** `monday-magic-sql-2025.database.windows.net`
+- **Azure SQL Database:** `MondayMagicTracker` (Basic tier, ready)
+- **Azure Web App:** `monday-magic-tracker-app.azurewebsites.net` (Free tier, West US 2)
+- **Azure Container Registry:** `mondaymagicacr2025` (Basic tier)
+- **App Service Plan:** `MondayMagicTracker-plan` (Free tier)
+
+### ✅ **COMPLETED - Code & Repository:**
+- **GitHub Repository:** `https://github.com/Thor-DraperJr/MondayMagicTracker`
+- **Full Application Code:** ASP.NET Core 8 + React 18 with TypeScript
+- **GitHub Actions:** Configured for CI/CD deployment
+- **Environment Variables:** Database connection string and JWT keys configured
+
+### ✅ **COMPLETED - Application Features:**
+- User authentication with JWT tokens
+- Playgroup management system
+- Game tracking with commander selection
+- Statistics and analytics
+- RESTful API with Swagger documentation
+- Modern React frontend with responsive design
+
+### 🔧 **IN PROGRESS - Deployment Issues:**
+- **Issue:** Application showing Azure welcome page instead of React app
+- **Root Cause:** App startup/configuration issue (not infrastructure)
+- **Status:** Infrastructure is solid, debugging final app deployment
+
+### 📋 **NEXT SESSION TODO:**
+1. **Debug App Startup:** Check GitHub Actions deployment logs
+2. **Test Health Endpoint:** `https://monday-magic-tracker-app.azurewebsites.net/health`
+3. **Verify API Endpoints:** Test `/api/commanders` and `/swagger`
+4. **Fix React Frontend:** Ensure SPA routing works correctly
+5. **Test Full Application:** User registration, game tracking, etc.
+
+### 🔑 **Important URLs:**
+- **Live App:** `https://monday-magic-tracker-app.azurewebsites.net`
+- **GitHub Repo:** `https://github.com/Thor-DraperJr/MondayMagicTracker`
+- **GitHub Actions:** `https://github.com/Thor-DraperJr/MondayMagicTracker/actions`
+- **Azure Portal:** Resource Group `MondayMagicTracker-rg`
+
+### 💡 **Key Insights:**
+- All Azure resources are successfully provisioned and running
+- Database connection string and environment variables are configured
+- The application builds successfully in GitHub Actions
+- Issue is likely related to ASP.NET Core startup or React SPA configuration
+- Infrastructure costs: ~$0-5/month (using free/basic tiers)
+
+---
+
 ## Features
 
 - **User Authentication**: Secure JWT-based authentication with ASP.NET Core Identity
